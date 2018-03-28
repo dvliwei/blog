@@ -1,0 +1,30 @@
+参考文档https://laravel-china.org/topics/896/laravel5-php-56-email-solution
+//个人账户 回出现发送超时现象
+//
+
+
+配置
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.126.com
+MAIL_PORT=25
+MAIL_USERNAME=liwei1987821@126.com
+MAIL_PASSWORD=18792655916
+MAIL_ENCRYPTION=null
+MAIL_FROM_NAME=iceTea
+MAIL_FROM_ADDRESS=liwei1987821@126.com
+
+
+
+config/mail.php 配置
+
+'driver' => env('MAIL_DRIVER', 'smtp'),
+
+发送邮件的方法
+=========================================================================================================
+$content = '这是一封来自Laravel的测试邮件.';
+$toMail  = 'liwei1987821@126.com';
+Mail::raw($content, function ($message) use ($toMail) {
+    $message->subject('[ 测试 ] 测试邮件SendMail - ' .date('Y-m-d H:i:s'));
+    $message->to($toMail);
+});
+=========================================================================================================

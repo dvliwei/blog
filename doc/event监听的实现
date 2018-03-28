@@ -1,0 +1,18 @@
+参考文章https://segmentfault.com/a/1190000004051306
+
+类似业务需求
+用户查看某件商品的次数监听
+用户查询一次商品信息 则累计加1
+
+1 注册事件以及监听器
+首先我们需要在 app/Providers/目录下的EventServiceProvider.php中注册事件监听器映射关系，如下：
+protected $listen = [
+        'App\Events\OrderView' => [
+            'App\Listeners\OrderViewListener',
+        ],
+    ];
+
+#php artisan event:generate
+
+该命令完成后，会分别自动在 app/Events和app/Listensers目录下生成 OrderView.php和OrderViewListener.php文件。
+

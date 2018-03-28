@@ -1,0 +1,66 @@
+参考文章https://segmentfault.com/a/1190000004997982
+基于 Pusher 驱动的 Laravel 事件广播
+pusher注册地址 https://dashboard.pusher.com/
+账号密码   php.wei.li@gmail.com   /   liwei1987821
+
+app_id = "495592"
+key = "5ee149bd1d5319b5a82b"
+secret = "a228dbec339dc43fca32"
+cluster = "ap1"
+
+
+
+删除  config/app.php   App\Providers\BroadcastServiceProvider::class, 注释
+
+在PHP包资源库中查找pusher，安装：
+composer require vinkla/pusher
+
+php artisan vendor:publish
+
+在config/pusher.php文件中更新下配置文件：
+
+不知道为什么使用env不太好用。 这块直接写死了
+'connections' => [
+
+        'main' => [
+            'auth_key' => '007db6a6ef080e4694fb',
+            'secret' => '5fac871a97fb5e8f3b0b',
+            'app_id' => '495590',
+            'options' => [
+                'cluster'=>'ap1',
+                'encrypted' => true
+            ],
+            'host' => null,
+            'port' => null,
+            'timeout' => null,
+        ],
+
+        'alternative' => [
+            'auth_key' => '007db6a6ef080e4694fb',
+            'secret' => '5fac871a97fb5e8f3b0b',
+            'app_id' => '495590',
+            'options' => [
+                'cluster'=>'ap1',
+                'encrypted' => true
+            ],
+            'host' => null,
+            'port' => null,
+            'timeout' => null,
+        ],
+
+然后在路由器中使用
+
+get('/bridge', function() {
+    $pusher = \Illuminate\Support\Facades\App::make('pusher');
+
+    $pusher->trigger( 'test-channel',
+                      'test-event',
+                      ['text' => 'I Love China!!!']
+                    );
+    return 'This is a Laravel Pusher Bridge Test!';
+});
+
+
+你可以在pusher的 debug console去调试   也可以写一个demo
+
+
