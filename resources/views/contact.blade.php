@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 {!! NoCaptcha::renderJs() !!}
-{!! NoCaptcha::renderJs('fr', true, 'recaptchaCallback') !!}
+{!! NoCaptcha::renderJs('en', true, 'recaptchaCallback') !!}
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -52,10 +52,10 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label">Captcha</label>
                         <div class="col-md-6">
-                            {!! app('captcha')->display() !!}
+                            {!! NoCaptcha::display()!!}
                         </div>
                     </div>
-
+                    <!--<div class="g-recaptcha" data-sitekey="6LcCXU8UAAAAAIO4t5LrqwoPkWoZQr21nCBtBI8v"></div>-->
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
                             <button type="submit" class="btn btn-primary">
