@@ -1,0 +1,61 @@
+参照文档
+https://github.com/ARCANEDEV/LogViewer/blob/master/_docs/1.Installation-and-Setup.md
+
+
+composer require arcanedev/log-viewer
+
+
+'providers' => [
+    ...
+    Arcanedev\LogViewer\LogViewerServiceProvider::class,
+],
+
+
+php artisan log-viewer:publish
+
+
+php artisan log-viewer:publish --force
+
+
+php artisan log-viewer:publish --tag=config
+
+
+php artisan log-viewer:publish --tag=lang
+
+
+php artisan log-viewer:check
+
+
+
+修改源码
+
+config/app
+
+'providers' => [
+
+    Arcanedev\LogViewer\LogViewerServiceProvider::class,
+
+
+config/logging
+
+'single' => [
+    'driver' => 'single',
+    'path' => storage_path('logs/laravel-'.date('Y-m-d').'.log'),
+    'level' => 'debug',
+],
+
+'daily' => [
+    'driver' => 'daily',
+    'path' => storage_path('logs/laravel-'.date('Y-m-d').'.log'),
+    'level' => 'debug',
+    'days' => 7,
+],
+
+
+
+增加log日志只有管理员可以查看方法
+首先要开通auth
+config/log-viewer
+
+
+'middleware' => ['web','auth'],

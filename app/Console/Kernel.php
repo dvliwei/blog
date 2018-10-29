@@ -2,6 +2,9 @@
 
 namespace App\Console;
 
+use App\Console\Commands\LivePlay\FilgoalCommand;
+use App\Console\Commands\LivePlay\KoraextraCommand;
+use App\Console\Commands\LivePlay\YallaShootCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -14,6 +17,9 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\TestEventCommand::class,
+        Commands\LivePlay\YallaShootCommand::class,
+        Commands\LivePlay\FilgoalCommand::class,
+        Commands\LivePlay\KoraextraCommand::class
     ];
 
     /**

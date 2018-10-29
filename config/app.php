@@ -171,8 +171,28 @@ return [
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
 
+        //用户权限
+        Spatie\Permission\PermissionServiceProvider::class,
 
+        //log
+        Arcanedev\LogViewer\LogViewerServiceProvider::class,
 
+        //门面
+        App\Providers\TokenManageServiceProvider::class,
+        App\Providers\BlogServiceProvider::class,
+
+        //laravel-graphdql
+        Folklore\GraphQL\ServiceProvider::class,
+
+       // Aex\CurrentAction\Facades\CurrentAction::class,
+
+        //Aws\Laravel\AwsServiceProvider::class,
+
+        Ixudra\Curl\CurlServiceProvider::class,
+
+        App\Models\Manage\Providers\ManageServiceProviders::class,
+
+        Jenssegers\Mongodb\MongodbServiceProvider::class,
     ],
 
     /*
@@ -225,6 +245,14 @@ return [
         'Html'=>Collective\Html\HtmlFacade::class,
         'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
         'Input' => Illuminate\Support\Facades\Input::class,
+        'TokenManage'=>\App\Facades\TokenManageFacade::class,
+        'BlogService'=>\App\Facades\Blog\BlogFacade::class,
+        'GraphQL'=>Folklore\GraphQL\Support\Facades\GraphQL::class,
+        'Cps'=>CpsTplExample::class,
+        //'AWS' => Aws\Laravel\AwsFacade::class,
+        'Curl'=>Ixudra\Curl\Facades\Curl::class,
+        'Manage'=>\App\Models\Manage\Facade\ManageFacade::class,
+        'Moloquent' => Jenssegers\Mongodb\Eloquent\Model::class,
     ],
 
 ];

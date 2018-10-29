@@ -11,6 +11,10 @@
 |
 */
 
+
+Route::get('/sendSMS/{phone_number}', 'SMSController@sendSMS');
+
+
 Route::get('/', function () {
     return view('welcome',['website'=>'laravel 自我学习']);
 });
@@ -23,6 +27,7 @@ Route::get('user/{id}', function($id){
 Route::get('posts/{post}/comments/{comment}', function($postId , $commentId){
     return $postId .'_'.$commentId;
 });
+
 
 
 //Route::get('users/{name?}', function($name='John'){
@@ -45,6 +50,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+Route::get('/mongo', 'HomeController@mongo')->name('mongo');
+
+
 Route::get('/bridge', function() {
     $pusher = \Illuminate\Support\Facades\App::make('pusher');
     $pusher->trigger( 'my-channel',
@@ -61,4 +70,8 @@ Route::get('contact', function() {
     return View::make('contact');
 });
 Route::post('contact', 'EnquiryController@index');
+
+Route::get('token', 'TokenManageController@index');
+
+Route::get('blog', 'BlogController@index');
 

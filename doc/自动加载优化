@@ -1,0 +1,23 @@
+优化
+自动加载优化
+部署应用到生产环境时，确保优化过 Composer 的类自动加载映射以便 Composer 可以快速为给定类找到要加载的文件：
+
+composer install --optimize-autoloader
+
+
+优化配置加载
+部署应用到生产环境时，需要确保在部署过程中运行了 Artisan 命令 config:cache：
+php artisan config:cache
+
+注：如果你在部署过程中执行了 config:cache 命令，需要确保只在配置文件中调用了 env 函数。一旦配置被缓存后，就不会再加载 .env 文件，因此所有对 env 函数的调用都会返回 null。
+
+优化路由器
+如果你正在构建一个包含大量路由的大型应用，需要确保在部署过程中运行了 Artisan 命令 route:cache：
+
+php artisan route:cache
+这个命令会生成一个缓存文件将所有路由注册浓缩到单个方法调用，从而在注册大量路由时提升路由注册性能。
+
+注：由于该特性使用了 PHP 序列化功能，所以只能缓存基于控制器的应用路由，因为 PHP 不能序列化闭包。
+
+
+

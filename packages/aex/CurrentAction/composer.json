@@ -1,0 +1,19 @@
+{
+    "name": "liwei/current-action",
+    "description": "获取当前actionname",
+    "authors": [
+        {
+            "name": "李伟",
+            "email": "liwei1987821@126.com"
+        }
+
+    ],
+    "autoload": {
+
+        "psr-4": {
+            "App\\": "app/",
+            "Aex\\currentAction\\": "packages/aex/currentAction/src/"
+        }
+    },
+    "require": {}
+}

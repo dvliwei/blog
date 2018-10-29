@@ -1,0 +1,21 @@
+建表
+建立model
+建立service   业务逻辑类
+
+建立门面类    Facade
+
+绑定 业务逻辑类到服务容器   provider
+
+修改配置文件
+confi/app
+
+providers
+
+
+alias
+ name
+
+使用
+use  name
+
+name::function.....

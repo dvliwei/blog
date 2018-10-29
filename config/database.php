@@ -13,7 +13,9 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    //'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'mongodb'),
+
 
     /*
     |--------------------------------------------------------------------------
@@ -32,6 +34,18 @@ return [
     */
 
     'connections' => [
+
+        'mongodb' => [
+            'driver'   => 'mongodb',
+            'host'     => env('DB_HOST', '127.0.0.1'),
+            'port'     => 27017,
+            'database' => 'project_collection_web_page',
+            'username' => '',
+            'password' => '',
+            'options'  => [
+                'database' => 'project_collection_web_page' // sets the authentication database required by mongo 3
+            ]
+        ],
 
         'sqlite' => [
             'driver' => 'sqlite',

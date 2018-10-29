@@ -1,0 +1,22 @@
+php artisan make:auth
+
+
+
+php artisan migrate
+
+
+php artisan make:seeder UserTableSeeder
+
+注意修改appserviceProvider
+        Schema::defaultStringLength(191);
+
+添加代码
+DB::table('users')->insert([
+    'name' => 'admin',
+    'email' => 'admin@admin.com',
+    'password' => bcrypt('app@2018'),
+]);
+
+
+php artisan db:seed --class=UserTableSeeder
+

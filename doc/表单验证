@@ -1,0 +1,86 @@
+参考文档
+https://segmentfault.com/a/1190000003718819
+
+https://segmentfault.com/a/1190000011580448
+
+composer.json 文件中 增加         "laravelcollective/html": "^5.6",
+
+配置 config/app
+
+'providers' => [
+    // ...
+    Collective\Html\HtmlServiceProvider::class,
+    // ...
+],
+
+
+
+'aliases' => [
+    // ...
+    'Form' => Collective\Html\FormFacade::class,
+    'Html' => Collective\Html\HtmlFacade::class,
+    // ...
+],
+
+
+表单验证
+ 命令就可以生成一个用于表单验证Request类了，这
+php artisan make:request StoreArticleRequest
+
+实现验证
+可以看到里面会有两个方法：authorize()和 rules() 。authorize()可以这样简单地理解
+：我们在处理这个表单请求(通常是一个post请求)的时候是否是需要进行身份验证，这种验证是指：
+比如A发表的评论，B能不能进行编辑。如果不能，则保留返回false，如果可以，则修改返回true。
+那么我们这里的逻辑是：既然是发表文章，在我们这个站点注册的用户(如果开放注册的话)都是可以发表文章的，所以我们首先修改authorize()方法，
+将其返回值改为：return true;。
+
+public function rules()
+    {
+        return [
+            'title' => 'required',
+            'content' => 'required'
+        ];
+    }
+
+在controller中的使用
+
+public function store(Requests\StoreArticleRequest $request)
+    {
+        $input = $request->all();
+        //下面增加两行，顺便看看Request::get的使用
+        $input['intro'] = mb_substr($request->get('content'),0,64);
+     }
+
+反馈错误
+     @if($errors->any())
+             <ul class="alert alert-danger">
+                 @foreach($errors->all() as $error)
+                     <li>{{ $error }}</li>
+                 @endforeach
+             </ul>
+     @endif
+常用规则验证
+
+'email'=>'required|email',
+'password'=>'required|min:6|confirmed',
+'password_confirmation' => 'required|min:6'
+
+===========================================================================================================================================================================
+第二种验证方式使用 Validation
+
+使用这个之前可以将store(Requests\StoreArticleRequest $request)中的变量去掉
+
+$input = Request::all();
+$validator = Validator::make($input, [
+    'title' => 'required|min:3',
+    'body' => 'required',
+]);
+
+然后可以使用下面这样的方式来检查验证有没有通过：
+
+ if ($validator->fails())
+ {
+        return Redirect::to('/contact')->withInput()->withErrors($validator);
+ }
+
+

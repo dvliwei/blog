@@ -88,8 +88,22 @@
                     <a href="https://laravel-news.com">News</a>
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="whatsapp://send?text=Hello%20World赵之康!">Hello, world! </a>
+                    <a href="#" id="whatsAppShare">分享</a>
                 </div>
             </div>
         </div>
     </body>
 </html>
+<script type="text/javascript" src="{{ asset('hui/lib/jquery/1.9.1/jquery.min.js') }}"></script>
+<script>
+
+    $(function(){
+        $('#whatsAppShare').click(function(){
+            var url =  "http://web.whatsapp.com/send?text=" + encodeURI("Hello%20World赵之康!");
+            href.locale(url);
+        });
+
+    });
+
+</script>

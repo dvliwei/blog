@@ -1,0 +1,42 @@
+composer create-project laravel/laravel project_name
+
+cd project_name
+
+chmod -R 777 storage
+
+chmod -R 777 bootstrap
+
+php artisan make:auth
+
+composer require arcanedev/log-viewer
+
+增加配置修改部分代码
+
+php artisan log-viewer:publish
+
+php artisan log-viewer:publish --force
+
+php artisan log-viewer:publish --tag=config
+
+
+php artisan log-viewer:publish --tag=lang
+
+php artisan log-viewer:check
+
+
+修改 app/Providers/AppServiceProcider.php
+
+
+
+php artisan  migrate
+
+php artisan make:seeder UserTableSeeder
+
+
+DB::table('users')->insert([
+    'name' => 'admin',
+    'email' => 'admin@admin.com',
+    'password' => bcrypt('app@2018'),
+]);
+
+php artisan db:seed --class=UserTableSeeder

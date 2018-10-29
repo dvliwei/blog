@@ -2,30 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+//use App\Http\Requests\EnquiryRequest;
+use Request;
 use Input;
 use Validator;
 use Redirect;
 use Session;
-
+use NoCaptcha;
 class EnquiryController extends Controller
 {
     public function index()
     {
-        $data = Input::all();
+        $input = Input::all();
+
         $rules = array(
-            'name' => 'required',
-            'email' => 'required|email',
-            'subject' => 'required',
             'g-recaptcha-response' => 'required|captcha',
-            'msg' => 'required',
         );
-        $validator = Validator::make($data, $rules);
+        $validator = Validator::make($input, $rules);
         if ($validator->fails()){
-            return Redirect::to('/contact')->withInput()->withErrors($validator);
+            dd('error');
+            return Redirect::to('/contact');
         }
         else{
-            // Do your stuff.
+            dd('ok');
         }
     }
 }
